@@ -2,9 +2,28 @@ defmodule Topology do
   # import Set
 
   @moduledoc """
-  Documentation for `Topology`.
+  Returns a topology of the given set.
   """
 
+  @doc """
+  Returns a topology of the given set.
+
+  ## Examples
+
+      iex> Topology.topology(MapSet.new([:a, :b]))
+      MapSet.new([
+        MapSet.new([MapSet.new([]), MapSet.new([:a, :b])]),
+        MapSet.new([MapSet.new([]), MapSet.new([:a]), MapSet.new([:a, :b])]),
+        MapSet.new([MapSet.new([]), MapSet.new([:b]), MapSet.new([:a, :b])]),
+        MapSet.new([
+          MapSet.new([]),
+          MapSet.new([:a]),
+          MapSet.new([:b]),
+          MapSet.new([:a, :b])
+        ])
+      ])
+
+  """
   def topology(set) do
     set
     |> Set.power_set()
