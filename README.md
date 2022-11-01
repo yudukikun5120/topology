@@ -2,6 +2,8 @@
 
 Returns a topology for a given set.
 
+[![hex.pm version](https://img.shields.io/hexpm/v/topology.svg)](https://hex.pm/packages/topology)
+
 ```elixir
 import Topology
 
