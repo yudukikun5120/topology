@@ -21,7 +21,12 @@ defmodule Topology.InteriorTest do
 
   describe "be sufficient to four theorem" do
     test "first", state do
-      assert interior_operator(state[:m], state[:topological_space]) === state[:m]
+      {
+        underlying_set,
+        _
+      } = state[:topological_space]
+
+      assert interior_operator(underlying_set, state[:topological_space]) === underlying_set
     end
 
     test "second", state do
