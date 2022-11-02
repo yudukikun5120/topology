@@ -20,9 +20,7 @@ defmodule Topology.Interior do
       MapSet.new([:a, :b])
 
   """
-  def interior_operator(m, topological_space) do
-    {underlying_set, topology} = topological_space
-
+  def interior_operator(m, {underlying_set, topology}) do
     cond do
       m |> MapSet.subset?(underlying_set) ->
         topology
@@ -30,7 +28,19 @@ defmodule Topology.Interior do
         |> Set.union()
 
       true ->
-        {:error, "The set is not a interior of the topological space"}
+        {:error, "The set is not a subset of the underlying set."}
+    end
+  end
+
+  def closure_operator(m, {underlying_set, topology}) do
+    cond do
+      m |> MapSet.subset?(underlying_set) ->
+        Topology.closed_set_system({underlying_set, topology})
+        |> Enum.filter(&MapSet.subset?(m, &1))
+        |> Set.intersection()
+
+      true ->
+        {:error, "The set is not a subset of the underlying set."}
     end
   end
 end

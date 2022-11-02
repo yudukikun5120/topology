@@ -10,7 +10,7 @@ defmodule Topology do
 
   ## Examples
 
-      iex> Topology.topology(MapSet.new([:a, :b]))
+      iex> Topology.topologies(MapSet.new([:a, :b]))
       MapSet.new([
         MapSet.new([MapSet.new([]), MapSet.new([:a, :b])]),
         MapSet.new([MapSet.new([]), MapSet.new([:a]), MapSet.new([:a, :b])]),
@@ -24,7 +24,7 @@ defmodule Topology do
       ])
 
   """
-  def topology(set) do
+  def topologies(set) do
     set
     |> Set.power_set()
     |> Set.power_set()
@@ -34,7 +34,13 @@ defmodule Topology do
     |> MapSet.new()
   end
 
-  defdelegate open_set_system(set), to: __MODULE__, as: :topology
+  defdelegate open_set_systems(set), to: __MODULE__, as: :topologies
+
+  def closed_set_system({underlying_set, topology}) do
+    topology
+    |> Enum.map(&MapSet.difference(underlying_set, &1))
+    |> MapSet.new()
+  end
 
   @doc """
   Returns a discreate topology of the given set.
@@ -73,7 +79,7 @@ defmodule Topology do
 
   """
   def topological_spaces(set) do
-    topology(set)
+    topologies(set)
     |> Enum.map(&{set, &1})
   end
 
@@ -98,6 +104,14 @@ defmodule Topology do
 
   """
   def indiscrete_space(set), do: {set, indiscrete_topology(set)}
+
+  def is_open_set?(set, {_underlying_set, topology}), do: MapSet.member?(topology, set)
+
+  def is_closed_set?(set, {underlying_set, topology}) do
+    topology
+    |> MapSet.difference(set)
+    |> then(&MapSet.member?(underlying_set, &1))
+  end
 
   defp first(family_of_subsets, underlying_set) do
     MapSet.member?(family_of_subsets, underlying_set) &&
