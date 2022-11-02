@@ -108,9 +108,9 @@ defmodule Topology do
   def is_open_set?(set, {_underlying_set, topology}), do: MapSet.member?(topology, set)
 
   def is_closed_set?(set, {underlying_set, topology}) do
-    topology
-    |> MapSet.difference(set)
-    |> then(&MapSet.member?(underlying_set, &1))
+    set
+    |> then(&MapSet.difference(underlying_set, &1))
+    |> then(&MapSet.member?(topology, &1))
   end
 
   defp first(family_of_subsets, underlying_set) do
