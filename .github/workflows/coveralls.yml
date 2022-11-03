@@ -1,0 +1,19 @@
+name: Coveralls post
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Post test coverage to Coveralls
+    env:
+      MIX_ENV: test
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '24.1'
+          elixir-version: '1.14.0'
+      - run: mix deps.get
+      - run: mix coveralls.github
