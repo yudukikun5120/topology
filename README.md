@@ -3,6 +3,7 @@
 Returns a topology for a given set.
 
 [![hex.pm version](https://img.shields.io/hexpm/v/topology.svg)](https://hex.pm/packages/topology)
+[![Coverage Status](https://coveralls.io/repos/github/yudukikun5120/topology/badge.svg?branch=main)](https://coveralls.io/github/yudukikun5120/topology?branch=main)
 
 ```elixir
 import Topology
