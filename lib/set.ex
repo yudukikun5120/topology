@@ -75,7 +75,8 @@ defmodule Set do
       list when length(tl(list)) === 0 ->
         list
         |> hd
-        |> (fn e -> [[], [e]] end).()
+        |> then(&[&1])
+        |> then(&[[], &1])
 
       [head | tail] ->
         power_list(tail) ++ Enum.map(power_list(tail), &[head | &1])
