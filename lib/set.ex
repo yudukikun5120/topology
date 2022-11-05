@@ -20,6 +20,7 @@ defmodule Set do
     |> MapSet.new()
   end
 
+  @spec intersection(MapSet.t()) :: MapSet.t()
   @doc """
   Returns a intersection of the given sets.
 
@@ -33,8 +34,40 @@ defmodule Set do
     set |> Enum.reduce(fn e, acc -> MapSet.intersection(e, acc) end)
   end
 
+  @spec union(MapSet.t()) :: MapSet.t()
+  @doc """
+  Returns a union of the given sets.
+
+  ## Examples
+
+      iex> Set.union(MapSet.new([MapSet.new([3, 4, 6]), MapSet.new([1, 4, 3]), MapSet.new([5, 2, 3])]))
+      MapSet.new([1, 2, 3, 4, 5, 6])
+
+  """
   def union(set) do
     set |> Enum.reduce(fn e, acc -> MapSet.union(e, acc) end)
+  end
+
+  @spec function_set(MapSet.t(), MapSet.t()) :: MapSet.t()
+  @doc """
+  Returns a function set of the given sets.
+
+  ## Examples
+
+      iex> Set.function_set(MapSet.new([:a, :b, :c]), MapSet.new([1, 2, 3]))
+      MapSet.new([%{a: 1}, %{a: 2}, %{a: 3}, %{b: 1}, %{b: 2}, %{b: 3}, %{c: 1}, %{c: 2}, %{c: 3}])
+
+  """
+  def function_set(domain_set, codomain_set) do
+    domain_set
+    |> Enum.map(
+      fn domain->
+        codomain_set
+        |> Enum.map(fn codomain -> %{domain => codomain} end)
+      end
+    )
+    |> List.flatten()
+    |> MapSet.new()
   end
 
   defp power_list(list) do
