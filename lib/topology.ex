@@ -13,6 +13,12 @@ defmodule Topology do
   @doc """
   Returns a topology of the given set.
 
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{O} \\subset \\mathfrak{P}(S)
+  $$
+
   ## Examples
 
       iex> Topology.topologies(MapSet.new([:a, :b]))
@@ -43,6 +49,22 @@ defmodule Topology do
 
   @doc """
   Returns a closed set system of the given topological space.
+
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{U}
+  $$
+
+  ## Theorem
+
+  A closed set system is a topology if and only if it satisfies the following conditions:
+
+    1. $$S \\in \\mathfrak{U},\\ \\phi \\in \\mathfrak{U}$$
+
+    2. $$A_1, A_2 \\in \\mathfrak{U} \\implies A_1 \\cup A_2 \\in \\mathfrak{U}$$
+
+    3. $$A_1, A_2 \\in \\mathfrak{U} \\implies A_1 \\cap A_2 \\in \\mathfrak{U}$$
 
   ## Examples
 
@@ -76,6 +98,12 @@ defmodule Topology do
   @doc """
   Returns a discreate topology of the given set.
 
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{O}^\\ast
+  $$
+
   ## Examples
 
       iex> Topology.discrete_topology(MapSet.new([:a, :b]))
@@ -88,6 +116,12 @@ defmodule Topology do
   @doc """
   Returns a indiscreate topology of the given set.
 
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{O}_\\ast
+  $$
+
   ## Examples
 
       iex> Topology.indiscrete_topology(MapSet.new([:a, :b]))
@@ -98,6 +132,12 @@ defmodule Topology do
 
   @doc """
   Returns a topological spaces of the given set.
+
+  ## Mathematical expression
+
+  $$
+  (S, \\mathfrak{O})
+  $$
 
   ## Examples
 
@@ -119,6 +159,12 @@ defmodule Topology do
   @doc """
   Returns a discrete space of the given set.
 
+  ## Mathematical expression
+
+  $$
+  (S, \\mathfrak{O}^\\ast)
+  $$
+
   ## Examples
 
       iex> Topology.discrete_space(MapSet.new([:a, :b]))
@@ -130,6 +176,12 @@ defmodule Topology do
   @spec indiscrete_space(MapSet.t()) :: topological_space()
   @doc """
   Returns a discrete space of the given set.
+
+  ## Mathematical expression
+
+  $$
+  (S, \\mathfrak{O}_\\ast)
+  $$
 
   ## Examples
 

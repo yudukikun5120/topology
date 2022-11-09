@@ -6,6 +6,12 @@ defmodule Set do
   @doc """
   Returns a power set of the given set.
 
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{P}(S)
+  $$
+
   ## Examples
 
       iex> Set.power_set(MapSet.new([1, 2, 3]))
@@ -24,6 +30,12 @@ defmodule Set do
   @doc """
   Returns a intersection of the given sets.
 
+  ## Mathematical expression
+
+  $$
+  \\cap_{\\lambda \\in \\Lambda} S_{\\lambda}
+  $$
+
   ## Examples
 
       iex> Set.intersection(MapSet.new([MapSet.new([3, 4, 6]), MapSet.new([1, 4, 3]), MapSet.new([5, 2, 3])]))
@@ -38,6 +50,12 @@ defmodule Set do
   @doc """
   Returns a union of the given sets.
 
+  ## Mathematical expression
+
+  $$
+  \\cup_{\\lambda \\in \\Lambda} S_{\\lambda}
+  $$
+
   ## Examples
 
       iex> Set.union(MapSet.new([MapSet.new([3, 4, 6]), MapSet.new([1, 4, 3]), MapSet.new([5, 2, 3])]))
@@ -51,6 +69,12 @@ defmodule Set do
   @spec function_set(MapSet.t(), MapSet.t()) :: MapSet.t()
   @doc """
   Returns a function set of the given sets.
+
+  ## Mathematical expression
+
+  $$
+  \\mathfrak{F} (S, T),\\ S^T
+  $$
 
   ## Examples
 
