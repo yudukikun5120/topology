@@ -5,7 +5,11 @@ defmodule Topology do
   Returns a topology of the given set.
   """
 
-  @spec topologies(MapSet.t()) :: MapSet.t(MapSet.t(MapSet.t()))
+  @type topology :: MapSet.t()
+  @type underlying_set :: MapSet.t()
+  @type topological_space :: {underlying_set, topology}
+
+  @spec topologies(MapSet.t()) :: topology
   @doc """
   Returns a topology of the given set.
 
@@ -61,14 +65,14 @@ defmodule Topology do
       ])
 
   """
-  @spec closed_set_system({MapSet.t(), MapSet.t(MapSet.t())}) :: MapSet.t()
+  @spec closed_set_system({underlying_set(), topology()}) :: MapSet.t()
   def closed_set_system({underlying_set, topology}) do
     topology
     |> Enum.map(&MapSet.difference(underlying_set, &1))
     |> MapSet.new()
   end
 
-  @spec discrete_topology(MapSet.t()) :: MapSet.t(MapSet.t())
+  @spec discrete_topology(MapSet.t()) :: topology()
   @doc """
   Returns a discreate topology of the given set.
 
@@ -80,7 +84,7 @@ defmodule Topology do
   """
   def discrete_topology(set), do: set |> Set.power_set()
 
-  @spec indiscrete_topology(MapSet.t()) :: MapSet.t(MapSet.t())
+  @spec indiscrete_topology(MapSet.t()) :: topology()
   @doc """
   Returns a indiscreate topology of the given set.
 
@@ -111,7 +115,7 @@ defmodule Topology do
     |> Enum.map(&{set, &1})
   end
 
-  @spec discrete_space(MapSet.t()) :: {MapSet.t(), MapSet.t()}
+  @spec discrete_space(MapSet.t()) :: topological_space()
   @doc """
   Returns a discrete space of the given set.
 
@@ -123,7 +127,7 @@ defmodule Topology do
   """
   def discrete_space(set), do: {set, discrete_topology(set)}
 
-  @spec indiscrete_space(MapSet.t()) :: {MapSet.t(), MapSet.t()}
+  @spec indiscrete_space(MapSet.t()) :: topological_space()
   @doc """
   Returns a discrete space of the given set.
 
@@ -135,7 +139,7 @@ defmodule Topology do
   """
   def indiscrete_space(set), do: {set, indiscrete_topology(set)}
 
-  @spec is_open_set?(MapSet.t(), {MapSet.t(), MapSet.t()}) :: boolean
+  @spec is_open_set?(MapSet.t(), {underlying_set(), topology()}) :: boolean
   @doc """
   Returns a boolean indicating whether the given set is an open set of the given topological space.
 
@@ -157,7 +161,7 @@ defmodule Topology do
   """
   def is_open_set?(set, {_underlying_set, topology}), do: MapSet.member?(topology, set)
 
-  @spec is_closed_set?(MapSet.t(), {MapSet.t(), MapSet.t()}) :: boolean
+  @spec is_closed_set?(MapSet.t(), {underlying_set(), topology()}) :: boolean
   @doc """
   Returns a boolean indicating whether the given set is an closed set of the given topological space.
 

@@ -1,4 +1,6 @@
 defmodule Topology.Interior do
+  @spec interior_operator(MapSet.t(), {Topology.underlying_set(), Topology.topology()}) ::
+          MapSet.t() | {:error, <<_::368>>}
   @doc """
   Returns a interior of the given set for topological space.
 
