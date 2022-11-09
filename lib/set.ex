@@ -60,12 +60,10 @@ defmodule Set do
   """
   def function_set(domain_set, codomain_set) do
     domain_set
-    |> Enum.map(
-      fn domain->
-        codomain_set
-        |> Enum.map(fn codomain -> %{domain => codomain} end)
-      end
-    )
+    |> Enum.map(fn domain ->
+      codomain_set
+      |> Enum.map(fn codomain -> %{domain => codomain} end)
+    end)
     |> List.flatten()
     |> MapSet.new()
   end
