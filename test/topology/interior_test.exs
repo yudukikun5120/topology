@@ -1,7 +1,7 @@
-defmodule Topology.InteriorTest do
+defmodule Topology.OperatorTest do
   use ExUnit.Case
-  import Topology.Interior
-  doctest Topology.Interior
+  import Topology.Operator
+  doctest Topology.Operator
 
   setup_all do
     {

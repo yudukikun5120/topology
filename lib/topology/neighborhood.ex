@@ -31,7 +31,7 @@ defmodule Neighborhood do
 
       true ->
         {:ok,
-         subset |> Topology.Interior.interior_operator(topological_space) |> MapSet.member?(x)}
+         subset |> Topology.Operator.interior_operator(topological_space) |> MapSet.member?(x)}
     end
   end
 end
