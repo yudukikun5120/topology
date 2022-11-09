@@ -4,7 +4,7 @@ defmodule Topology.Operator do
 
   ## Lemma
 
-  Let $(S, \\mathfrak{O})$ be a topological space and \\(M \\subset S\\) be a subset of \\(S\\) . Then the following statements are equivalent:
+  Let $(S, \\mathfrak{O})$ be a topological space and $M$ be a subset of $S$ . Then the following statements are equivalent:
 
   $$
   \\overline{M^c} = (M^{○})^c
